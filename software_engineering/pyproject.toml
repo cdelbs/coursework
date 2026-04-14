@@ -1,0 +1,65 @@
+[project]
+name = "fishgame"
+version = "1.0.0"
+description = "Hey, That's My Fish! game implementation"
+requires-python = ">=3.11"
+dependencies = [
+    "PyQt5>=5.15.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "black>=24.0.0",
+    "isort>=5.13.0",
+    "flake8>=7.0.0",
+    "flake8-pyproject>=1.2.0",
+    "mypy>=1.11.0",
+    "pydocstyle>=6.3.0",
+    "pytest>=8.0.0",
+    "pytest-cov>=5.0.0",
+    "pytest-mock>=3.14.0",
+    "pre-commit>=3.7.0",
+    "types-requests>=2.31.0",
+]
+
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+packages = ["Fish"]
+
+[tool.black]
+line-length = 88
+target-version = ["py311"]
+
+[tool.isort]
+profile = "black"
+line_length = 88
+
+[tool.flake8]
+ignore = ["E203", "E266", "E501", "W503", "F401"]
+max-line-length = 88
+max-complexity = 18
+extend-exclude = [".venv", ".micromamba", "build", "dist", ".git"]
+
+[tool.pydocstyle]
+convention = "pep257"
+add-ignore = ["D100","D101","D102","D103","D104","D205","D400"]
+
+[tool.mypy]
+python_version = "3.11"
+ignore_missing_imports = true
+warn_unused_ignores = true
+warn_redundant_casts = true
+exclude = [".venv", ".micromamba", "build", "dist"]
+
+[tool.pytest.ini_options]
+testpaths = ["Fish/Other"]
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+addopts = "-ra -q --strict-markers"
+markers = [
+    "gui: marks tests that require GUI/Qt (deselect with '-m \"not gui\"')",
+]

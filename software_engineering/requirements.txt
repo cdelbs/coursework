@@ -1,0 +1,16 @@
+black
+isort
+flake8
+flake8-pyproject
+mypy
+pydocstyle
+pytest
+pytest-cov
+pytest-mock
+pre-commit
+types-requests
+PyQt5
+py-spy
+snakeviz
+websockets
+inputimeout

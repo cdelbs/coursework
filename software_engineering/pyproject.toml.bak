@@ -1,0 +1,73 @@
+[project]
+name = "fiddlers"
+version = "0.1.0"
+description = "Fish game coursework"
+requires-python = ">=3.11"
+dependencies = []
+
+[project.optional-dependencies]
+dev = [
+  "black",
+  "isort",
+  "flake8",
+  "flake8-pyproject",
+  "mypy",
+  "pydocstyle",
+  "pytest",
+  "pytest-cov",
+  "pytest-mock",
+  "pre-commit",
+  "types-requests",
+]
+
+[tool.black]
+line-length = 88
+target-version = ["py311"]
+extend-exclude = """
+(
+  ^\.venv/
+| ^\.git/
+| ^build/
+| ^dist/
+)
+"""
+
+[tool.isort]
+profile = "black"
+line_length = 88
+combine_as_imports = true
+known_first_party = ["Fish","Common"]
+skip = [".venv","build","dist",".git"]
+
+[tool.flake8]
+ignore = ["E203","E266","E501","W503","F401"]
+max-line-length = 88
+max-complexity = 18
+select = ["E", "F", "W", "C90"]
+exclude = [".venv", "build", "dist", ".git", "__pycache__"]
+
+[tool.pydocstyle]
+convention = "pep257"
+add-ignore = ["D100","D101","D102","D103","D104","D205","D400"]
+
+[tool.mypy]
+python_version = "3.11"
+pretty = true
+warn_return_any = true
+warn_unused_ignores = true
+warn_redundant_casts = true
+warn_unreachable = true
+disallow_untyped_defs = false
+no_implicit_optional = true
+ignore_missing_imports = true
+# single-line regex to avoid TOML parsing issues
+exclude = "(\\.venv/|build/|dist/|\\.git/|5/Tests/|4/Tests/)"
+
+[[tool.mypy.overrides]]
+module = ["PyQt5.*"]
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+addopts = "-q"
+testpaths = ["Fish/Other","4/Tests","5/Tests"]
+markers = ["gui: marks a test as requiring a GUI"]
